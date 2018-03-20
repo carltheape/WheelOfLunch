@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SPIN</title>
+</head>
+<style type="text/css">
+	body{
+		background-color: lightgrey;
+	}
+	
+	h1{
+		
+/*		padding: 0 50%;*/
+		text-align: center;
+		
+	}
+	
+	canvas{
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}
+	
+	#spin{
+		position: absolute;
+		top: 49%;
+		left: 48.5%;
+	}
+	
+	#restaurants{
+		position: absolute;
+		top: 15%;
+		left: 15%;
+		
+	}
+	
+	#restaurants li{
+		font-weight: bold;
+		padding-bottom: 5px;
+		padding-right: 15px;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+			text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+	}
+	
+
+	
+</style>
+
+<body>
+	<h1>Wheel of Lunch!</h1>
+	<ul id="restaurants">
+		<input id="resField" type="string" name="restaurants" placeholder="Add Restaurants here">
+		<button id="add">ADD</button>
+	</ul>
+	<canvas>
+	</canvas>
+	<button id="spin">spin</button>
+	
+  <script type="text/javascript" src="spinner.js"></script>
+</body>
+</html>
