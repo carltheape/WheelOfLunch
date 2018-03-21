@@ -122,6 +122,11 @@ let drawCir = function(items) {
         start += section;
     }
 
+    if (Object.keys(sections).length > 1) {
+    document.getElementById("spin").style.display="initial";
+
+    }
+
 
 };
 
