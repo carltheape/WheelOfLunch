@@ -27,7 +27,7 @@ let getRandomColor = function() {
         color += letters[Math.floor(Math.random() * 16)];
     }
     newColor = color;
-    return color;
+    return color+"80";
 
 };
 
@@ -93,11 +93,12 @@ let spinIt = function() {
 
 
     } else {
-        momentum = Math.random();
+        momentum = Math.random()+Math.random();
         spinIt();
     }
 }
 let drawCir = function(items) {
+    c.clearRect(0, 0, canvas.width, canvas.height);
     let start = 0;
     let section = (Math.PI * 2) / items;
 
