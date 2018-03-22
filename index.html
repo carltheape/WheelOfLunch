@@ -2,11 +2,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <title>SPIN</title>
 </head>
 <style type="text/css">
 	body{
-		background-color: lightgrey;
+		background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/food.png");
 	}
 	
 	h1{
@@ -37,31 +39,83 @@
 	}
 	
 	#restaurants li{
-		font-weight: bold;
+/*		font-weight: bold;*/
 		padding-bottom: 5px;
 		padding-right: 15px;
 		font-family: "Comic Sans MS", cursive, sans-serif;
-			text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000;
+		background-color: rgba(255, 255, 255, 0.2);
+		list-style-type: none;
+		text-align: center;
+		font-size: 20px;
+		-webkit-text-stroke-width: 1px;
+  		-webkit-text-stroke-color: black;
+	}
+	#title1, #title2, #title3{
+		position: relative;
+		display: inline-block;
+		top: -100vh;
+		font-family: 'Monoton', cursive;
+		font-size: 50px;
+		font-weight: lighter;
 	}
 	
-
+	#title{
+		text-align: center;
+		padding-top: 30px;
+	}
+	
+	#sammy{
+		position: absolute;
+		width: 175px;
+		top: -100%;
+		transform: translateY(-10%);
+	}
+	
+	#modal-body{
+		text-align: center;
+		font-size: 25px;
+		padding: 15px 0;
+	}
 	
 </style>
 
 <body>
-	<h1>Wheel of Lunch!</h1>
+	<div id="title">	
+	<h1 id="title1">Wheel&ensp;</h1><h1 id="title2">of&ensp;</h1><h1 id="title3">Lunch</h1>
+	<img id="sammy" src="http://www.clker.com/cliparts/f/P/z/P/3/a/sandwich-half-3.svg">
+	</div>
 	<ul id="restaurants">
 		<input id="resField" type="string" name="restaurants" placeholder="Add Restaurants here">
-		<button id="add">ADD</button>
+		<button class="btn btn-success" id="add">ADD</button>
 	</ul>
 	<canvas>
 	</canvas>
-	<button id="spin">spin</button>
+	<button class="btn btn-info" id="spin">spin</button>
 	
-  <script type="text/javascript" src="spinner.js"></script>
+	
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Get get some....</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  	<script type="text/javascript" src="spinner.js"></script>
 </body>
 </html>
