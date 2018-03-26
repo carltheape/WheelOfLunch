@@ -154,14 +154,14 @@ let drawCir = function(items) {
 
 };
 
-let button = function(el, i){
+let button = function(el){
     let but = document.createElement("BUTTON");
     but.innerHTML = "&#10006";
     let cls = document.createAttribute("class");
     cls.value = "deleteKey delete btn btn-sm btn-danger";
     but.setAttributeNode(cls);
     but.onclick = deleteRes;
-    el.prepend(but);
+    $(el).prepend(but);
 };
 
 let addRes = function() {
