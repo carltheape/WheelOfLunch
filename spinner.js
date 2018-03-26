@@ -51,7 +51,7 @@ let getRandomColor = function() {
     }
     newColor = color;
     if(isIE || isEdge){
-        return color+"80";
+        return color;
     }
    else{return color+"80";}
 
