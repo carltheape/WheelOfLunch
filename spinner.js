@@ -2,6 +2,9 @@ var canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// var stuff = ["kfc", "mcd", "king"];
+// var restaurants = JSON.parse(localStorage.getItem("restaurants"));
+// console.log(JSON.parse(localStorage.getItem("restaurant")));
 
 var settings = {
     lossOfMomentum: .001
@@ -32,6 +35,9 @@ let getRandomColor = function() {
 };
 
 let restaurants = [];
+if (JSON.parse(localStorage.getItem("restaurants"))){
+            restaurants = JSON.parse(localStorage.getItem("restaurants"));
+        };
 let sections = {};
 let position = 0;
 let momentum = 0;
@@ -40,9 +46,14 @@ let momentum = 0;
 let moving = false;
 
 let spinIt = function() {
-    document.getElementById("resField").style.display = "none";
-    document.getElementById("add").style.display = "none";
-    document.getElementById("spin").style.display = "none";
+    document.getElementById("resField").style.visibility = "hidden";
+    document.getElementById("add").style.visibility = "hidden";
+    document.getElementById("spin").style.visibility = "hidden";
+    let deleteKeys = document.getElementsByClassName("deleteKey");
+    for (var i = 0; i < deleteKeys.length; i++) {
+        deleteKeys[i].style.visibility = "hidden";
+    }
+    
     if (momentum > 0 && Object.keys(sections).length > 1) {
         c.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -82,9 +93,12 @@ let spinIt = function() {
                     
                     // alert(sections[i].name);
                     momentum = 0;
-                    document.getElementById("spin").style.display = "initial";
-                    document.getElementById("add").style.display = "initial";
-                    document.getElementById("resField").style.display = "initial";
+                    document.getElementById("spin").style.visibility = "visible";
+                    document.getElementById("add").style.visibility = "visible";
+                    document.getElementById("resField").style.visibility = "visible";
+                        for (var i = 0; i < deleteKeys.length; i++) {
+                            deleteKeys[i].style.visibility = "visible";
+                        }
 
                 }
 
@@ -98,6 +112,7 @@ let spinIt = function() {
     }
 }
 let drawCir = function(items) {
+    sections = {};
     c.clearRect(0, 0, canvas.width, canvas.height);
     let start = 0;
     let section = (Math.PI * 2) / items;
@@ -120,7 +135,6 @@ let drawCir = function(items) {
             color: newColor,
             name: restaurants[i]
         };
-
         document.getElementsByTagName("LI")[i].style.color = newColor;
         c.fillStyle = sections[i].color;
         c.fill();
@@ -129,42 +143,83 @@ let drawCir = function(items) {
     }
 
     if (Object.keys(sections).length > 1) {
-        document.getElementById("spin").style.display = "initial";
+        document.getElementById("spin").style.visibility = "visible";
+
+    }
+    else{
+        document.getElementById("spin").style.visibility = "hidden";
 
     }
 
 
 };
 
+let button = function(el, i){
+    let but = document.createElement("BUTTON");
+    but.innerHTML = "&#10006";
+    let cls = document.createAttribute("class");
+    cls.value = "deleteKey delete btn btn-sm btn-danger";
+    but.setAttributeNode(cls);
+    but.onclick = deleteRes;
+    el.prepend(but);
+};
+
 let addRes = function() {
     if (document.getElementById('resField').value) {
         let res = document.getElementById('resField').value;
         restaurants.push(res);
+        localStorage.setItem("restaurants", JSON.stringify(restaurants));
         let list = document.getElementById("restaurants");
         let listItem = document.createElement("LI");
         let textNode = document.createTextNode(res);
         listItem.appendChild(textNode);
         list.appendChild(listItem);
+        button(listItem);
         console.log(sections);
-        drawCir(restaurants.length)
+        drawCir(restaurants.length);
         listItem.style.color = newColor;
         document.getElementById('resField').value = "";
     }
-}
+};
 
+let start = function(){
+    console.log("restaurants", restaurants);
+        let list = document.getElementById("restaurants");
+        
+        for (var i = 0; i < restaurants.length; i++) {
+            
+        let listItem = document.createElement("LI");
+        let textNode = document.createTextNode(restaurants[i]);
+        listItem.appendChild(textNode);
+        list.appendChild(listItem);
+        button(listItem);
+        listItem.style.color = newColor;   
+        }
+        drawCir(restaurants.length);
+};
+
+let deleteRes = function(){
+    let deleteKeys = document.getElementsByClassName("deleteKey");
+    // console.log(deleteKeys, this.parentNode);
+    this.parentNode.parentNode.removeChild(this.parentNode);
+    let content = this.parentNode.innerText.substr(1);
+    // console.log(this.parentNode.innerText.substr(1));
+    let idx = restaurants.indexOf(content);
+    restaurants.splice(idx, 1);
+    localStorage.setItem("restaurants", JSON.stringify(restaurants));
+    drawCir(restaurants.length);
+};
 
 
 document.getElementById("spin").addEventListener('click', spinIt, false);
-
 document.getElementById("add").addEventListener('click', addRes, false);
-
-
 window.onload = function(){
 
 TweenLite.to("#title1", 0.75, {top: 0});
 TweenLite.to("#title2", 0.75, {top: 0, delay: 0.75});
 TweenLite.to("#title3", 0.75, {top: 0, delay: 1.5});
-TweenLite.to("#sammy", 0.75, {top: 20, delay: 1.65, rotation:"1080"});    
+TweenLite.to("#sammy", 0.75, {top: 20, delay: 1.65, rotation:"1080"});
+start();    
     
 };
 
