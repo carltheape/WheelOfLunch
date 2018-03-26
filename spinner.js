@@ -210,9 +210,18 @@ let deleteRes = function(){
     drawCir(restaurants.length);
 };
 
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+                // c.width = window.innerWidth;
+                // c.height = window.innerHeight;
+                drawCir(restaurants.length);
+            }
 
 document.getElementById("spin").addEventListener('click', spinIt, false);
 document.getElementById("add").addEventListener('click', addRes, false);
+window.addEventListener('resize', resizeCanvas, false);
+
 window.onload = function(){
 
 TweenLite.to("#title1", 0.75, {top: 0});
